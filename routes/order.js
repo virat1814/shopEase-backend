@@ -6,8 +6,8 @@ router.post('/add', addOrderDetails);
 router.get('/', getCustomerOrders);
 router.get('/:id', getOrderDetails)
 router.get('/invoice/:id', getInvoiceOfOrder)
-router.put('/confirmOrder/:id', updateOrderStatusToConfirmed)
-router.put('/shipped/:id', updateOrderStatusToShipped)
-router.put('/delivered/:id', updateOrderStatusToDelivered)
+router.put('/confirmOrder', updateOrderStatusToConfirmed)
+router.put('/shipped', updateOrderStatusToShipped)
+router.put('/delivered', updateOrderStatusToDelivered)
 
 module.exports = router

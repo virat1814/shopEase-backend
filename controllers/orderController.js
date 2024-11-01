@@ -54,11 +54,21 @@ const getCustomerOrders = async (req, res) => {
 }
 
 const updateOrderStatusToConfirmed = async (req, res) => {
+    // const updateStatus = products.status
+    const {orderId, productId} = req.body;
     try {
-        const order = await Order.findByIdAndUpdate(req.params.id, { status: 'Confirmed' }, { new: true })
-        // console.log(req.params.id)
+        const order = await Order.findById(orderId)
+        console.log(order)
+        console.log(productId, orderId)
         // await order.save();
         if(!order) return res.status(400).json({message: 'order not found', status: 400})
+        
+        const productIndex = order.products.findIndex(item => item.productId.equals(productId))
+        if(productIndex === -1) {
+            return res.status(200).json({message: 'Product not found in the order', status: 400})
+        }
+        order.products[productIndex].status = 'Confirmed';
+        await order.save();
         res.status(200).json({message: 'status updated',order, status: 200})
     } catch (error) {
         res.status(500).json({ message: error.message })
@@ -66,21 +76,42 @@ const updateOrderStatusToConfirmed = async (req, res) => {
 }
 
 const updateOrderStatusToShipped = async (req, res) => {
+    const {orderId, productId} = req.body;
     try {
-        const order = await Order.findByIdAndUpdate(req.params.id, { status: 'Shipped' }, { new: true })
+        const order = await Order.findById(orderId)
+        console.log(order)
+        console.log(productId, orderId)
         // await order.save();
         if(!order) return res.status(400).json({message: 'order not found', status: 400})
-        res.status(200).json({message: 'order shipped', status: 200})
+        
+        const productIndex = order.products.findIndex(item => item.productId.equals(productId))
+        if(productIndex === -1) {
+            return res.status(200).json({message: 'Product not found in the order', status: 400})
+        }
+        order.products[productIndex].status = 'Shipped';
+        await order.save();
+        res.status(200).json({message: 'status updated',order, status: 200})
     } catch (error) {
         res.status(500).json({ message: error.message })
     }
 }
 
 const updateOrderStatusToDelivered = async (req, res) => {
+    const {orderId, productId} = req.body;
     try {
-        const order = await Order.findByIdAndUpdate(req.params.id, { status: 'Delivered' }, { new: true })
+        const order = await Order.findById(orderId)
+        console.log(order)
+        console.log(productId, orderId)
+        // await order.save();
         if(!order) return res.status(400).json({message: 'order not found', status: 400})
-        res.status(200).json({message: 'order delivered', status: 200})
+        
+        const productIndex = order.products.findIndex(item => item.productId.equals(productId))
+        if(productIndex === -1) {
+            return res.status(200).json({message: 'Product not found in the order', status: 400})
+        }
+        order.products[productIndex].status = 'Delivered';
+        await order.save();
+        res.status(200).json({message: 'status updated',order, status: 200})
     } catch (error) {
         res.status(500).json({ message: error.message })
     }

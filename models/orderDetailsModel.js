@@ -31,6 +31,10 @@ const orderSchema = new mongoose.Schema({
             type: Number,
             required: true
         },
+        status: {
+        type: String,
+        default: 'Placed'
+    },
         
     }],
     paymentThrough: {
@@ -41,10 +45,10 @@ const orderSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    status: {
-        type: String,
-        default: 'Placed'
-    },
+    // status: {
+    //     type: String,
+    //     default: 'Placed'
+    // },
     createdAt: {
         type: String,
         default: () => {
