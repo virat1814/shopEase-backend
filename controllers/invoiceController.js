@@ -6,7 +6,7 @@ const addInvoice = async(req, res) => {
     try{
         const invoice = new Invoice({orderId, customerId, products: [{ productId, quantity }]});
         await invoice.save();
-        // console.log(invoice)
+
         const populatedInvoices = await Invoice.findById(invoice._id)
             .populate('orderId', 'totalAmount createdAt paymentThrough')
             .populate('customerId', 'name phoneNumber email address')

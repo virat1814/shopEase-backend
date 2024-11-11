@@ -36,7 +36,7 @@ app.use((req, res, next) => {
 app.use('/vendor', authRouter)
 app.use('/products', productRouter)
 app.use('/customer', customerRouter)
-app.use('/invoice', invoiceRouter)
+// app.use('/invoice', invoiceRouter)
 app.use('/orders', orderRouter)
 app.use('/cart', cartRouter)
 app.use('/wishlist', wishlistRouter)

@@ -20,12 +20,16 @@ const invoiceSchema = new mongoose.Schema({
         quantity: {
             type: Number,
             default: 1
-        }
+        },
+        status: {
+            type: String,
+            default: 'pending'
+        },
     }]
     // status: {
     //     type: String,
     //     default: 'pending'
     // },
-}, {timestamps: true})
+}, { timestamps: true })
 
 module.exports = mongoose.model('Invoice', invoiceSchema)

@@ -58,8 +58,8 @@ const updateOrderStatusToConfirmed = async (req, res) => {
     const {orderId, productId} = req.body;
     try {
         const order = await Order.findById(orderId)
-        console.log(order)
-        console.log(productId, orderId)
+        // console.log(order)
+        // console.log(productId, orderId)
         // await order.save();
         if(!order) return res.status(400).json({message: 'order not found', status: 400})
         
